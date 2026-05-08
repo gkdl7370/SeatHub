@@ -17,6 +17,7 @@ SeatHub 프로젝트의 방향을 정하고, 구현 전에 요구사항과 API, 
 - [x] 주요 API 목록 작성
 - [x] 예약 상태 흐름 작성
 - [x] 아키텍처 초안 작성
+- [x] 기존 포트폴리오 경험 재적용 방향 정리
 - [x] 첫 커밋 생성
 
 ## 아직 남은 작업
@@ -52,3 +53,12 @@ docs: define SeatHub day 1 planning
 4. 패키지 구조 작성
 5. Docker Compose 초안 작성
 
+## 방향 보완
+
+SeatHub는 완전히 별개의 토이프로젝트로 만들기보다 기존 GitHub 프로젝트에서 다룬 주제를 하나의 예약·결제 도메인에 다시 적용하는 방향으로 진행한다.
+
+- `One-Core-Architecture`: 도메인 경계와 외부 규격 분리
+- `Data-Flux`: 배치 처리와 성능 측정
+- `MassFlux-Gateway`: 고처리량 요청 처리와 병목 분석
+- `kafka-practice`: 이벤트 기반 처리, 재시도, DLQ 설계
+- `SimpleIoT.Gateway`: 운영 추적성과 상태 관리 관점
