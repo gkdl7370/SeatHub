@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/seathub?serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: seathub
+    password: seathub
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        default_batch_fetch_size: 100
+    open-in-view: false
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+logging:
+  pattern:
+    level: "%5p [%X{traceId:-}]"
+
