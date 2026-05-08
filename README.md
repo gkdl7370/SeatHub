@@ -125,13 +125,13 @@ READY
 
 ## 문서
 
-- [요구사항](docs/requirements.md)
-- [API 명세](docs/api-spec.md)
-- [아키텍처](docs/architecture.md)
+- [요구사항](docs/요구사항.md)
+- [API 명세](docs/API명세.md)
+- [아키텍처](docs/아키텍처.md)
 - [ERD](docs/erd.md)
-- [예약 상태 흐름](docs/state-flow.md)
-- [기술 스택 결정](docs/tech-stack.md)
-- [패키지 구조](docs/package-structure.md)
+- [예약 상태 흐름](docs/예약상태흐름.md)
+- [기술 스택 결정](docs/기술스택.md)
+- [패키지 구조](docs/패키지구조.md)
 
 ---
 
