@@ -1,0 +1,53 @@
+# 기술 스택 결정
+
+## 1차 구현 스택
+
+| 영역 | 기술 | 선택 이유 |
+| --- | --- | --- |
+| Language | Java 17 | Spring Boot 3.x와 안정적으로 사용 가능하고 채용 공고에서 요구 빈도가 높음 |
+| Framework | Spring Boot 3.x | REST API, 인증, 배치, 테스트 환경 구성이 용이함 |
+| ORM | Spring Data JPA | 도메인 중심 구현과 Repository 테스트에 적합함 |
+| Query | QueryDSL | 관리자 검색 조건이 많아질 때 동적 쿼리를 명확하게 관리하기 위함 |
+| Database | MySQL 8 | 예약/결제 트랜잭션과 인덱스 튜닝을 검증하기 좋음 |
+| Cache / Lock | Redis 7 | 1차에서는 Docker 환경만 준비하고, 2차에서 분산 락/캐시 비교에 사용 |
+| Auth | Spring Security, JWT | 사용자/관리자 API 권한 분리에 필요 |
+| Test | JUnit5, AssertJ, Mockito | 단위/통합 테스트 기본 조합 |
+| Integration Test | Testcontainers | MySQL/Redis 기반 테스트 재현성 확보 |
+| API Docs | Swagger | 초기 API 확인과 테스트가 쉬움 |
+| Infra | Docker, Docker Compose | 로컬 실행 환경 표준화 |
+| CI | GitHub Actions | 테스트 자동 실행 |
+| Monitoring | Spring Actuator | Health Check와 운영 지표 확장 기반 |
+| Load Test | k6 | 관리자 검색과 예약 생성 부하 테스트 |
+
+---
+
+## 2차 개선 후보
+
+| 영역 | 기술 | 적용 후보 |
+| --- | --- | --- |
+| Messaging | Kafka 또는 AWS SQS | 예약/결제 이벤트 비동기 처리 |
+| Observability | Prometheus, Grafana | JVM/API 지표 확인 |
+| Cloud | AWS EC2, RDS | 배포 환경 구성 |
+| Logging | CloudWatch 또는 Loki | 로그 수집과 장애 추적 |
+| Deployment | Nginx | Reverse Proxy, HTTPS 적용 |
+
+---
+
+## 선택하지 않은 것
+
+| 기술 | 보류 이유 |
+| --- | --- |
+| Kubernetes | 1차 범위에서는 프로젝트 복잡도를 키우는 요소가 더 큼 |
+| 실제 결제사 연동 | 결제 도메인 구조 검증이 목표라 Fake Client로 충분함 |
+| Outbox Pattern | 1차 구현 후 이벤트 기반 구조로 확장할 때 적용 |
+| Redis Distributed Lock | DB 비관적 락으로 먼저 정합성 기준을 만들고 비교 대상으로 적용 |
+
+---
+
+## 구현 원칙
+
+- 처음부터 많은 기술을 붙이기보다 예약·결제 핵심 흐름을 먼저 완성한다.
+- 성능 수치는 추측하지 않고 실제 측정 결과만 문서에 남긴다.
+- 외부 시스템 의존성은 인터페이스로 분리한다.
+- 테스트와 문서를 구현과 함께 작성한다.
+

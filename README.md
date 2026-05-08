@@ -128,7 +128,26 @@ READY
 - [요구사항](docs/requirements.md)
 - [API 명세](docs/api-spec.md)
 - [아키텍처](docs/architecture.md)
+- [ERD](docs/erd.md)
 - [예약 상태 흐름](docs/state-flow.md)
+- [기술 스택 결정](docs/tech-stack.md)
+- [패키지 구조](docs/package-structure.md)
+
+---
+
+## 로컬 실행 환경
+
+MySQL과 Redis는 Docker Compose로 실행합니다.
+
+```bash
+docker compose up -d
+```
+
+컨테이너 상태 확인:
+
+```bash
+docker compose ps
+```
 
 ---
 

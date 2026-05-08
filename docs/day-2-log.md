@@ -1,0 +1,46 @@
+# Day 2 작업 기록
+
+날짜: 2026-05-08
+
+## 목표
+
+ERD 초안, 기술 스택 결정, 패키지 구조, Docker Compose 초안을 작성해 Spring Boot 프로젝트 생성 전 기반을 정리한다.
+
+## 완료한 작업
+
+- [x] ERD 초안 작성
+- [x] 핵심 테이블과 관계 정리
+- [x] 주요 제약 조건 정리
+- [x] 인덱스 후보 정리
+- [x] 기술 스택 결정 문서 작성
+- [x] 패키지 구조 문서 작성
+- [x] Docker Compose로 MySQL/Redis 실행 환경 초안 작성
+- [x] `docker compose config`로 Compose 문법 검증
+- [x] `.env.example` 작성
+- [x] README 문서 링크와 로컬 실행 안내 보완
+
+## 아직 남은 작업
+
+- [ ] Docker Compose 실제 컨테이너 실행 확인
+- [ ] Spring Boot 프로젝트 생성
+- [ ] MySQL 연결 설정
+- [ ] Redis 연결 설정
+- [ ] 공통 응답 포맷 작성
+- [ ] GlobalExceptionHandler 초안 작성
+
+## 오늘 만든 파일
+
+- `docs/erd.md`
+- `docs/tech-stack.md`
+- `docs/package-structure.md`
+- `docker-compose.yml`
+- `.env.example`
+- `docs/day-2-log.md`
+
+## 다음 작업 후보
+
+1. `docker compose up -d`로 MySQL/Redis 실행 확인
+2. Spring Boot 3.x 프로젝트 생성
+3. Gradle, Java 17 설정
+4. `application-local.yml` 작성
+5. 공통 응답/예외 구조 작성
