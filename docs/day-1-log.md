@@ -1,0 +1,54 @@
+# Day 1 작업 기록
+
+날짜: 2026-05-08
+
+## 목표
+
+SeatHub 프로젝트의 방향을 정하고, 구현 전에 요구사항과 API, 상태 흐름, 아키텍처 초안을 만든다.
+
+## 완료한 작업
+
+- [x] 로컬 `SeatHub` 폴더 생성
+- [x] 로컬 Git 저장소 초기화
+- [x] `.gitignore` 작성
+- [x] README 초안 작성
+- [x] 프로젝트 목표 작성
+- [x] 요구사항 30개 작성
+- [x] 주요 API 목록 작성
+- [x] 예약 상태 흐름 작성
+- [x] 아키텍처 초안 작성
+- [x] 첫 커밋 생성
+
+## 아직 남은 작업
+
+- [ ] GitHub 원격 repo 생성
+- [ ] ERD 초안 작성
+- [ ] 기술 스택 최종 확정
+- [ ] 패키지 구조 최종 확정
+- [ ] Docker Compose 초안 작성
+
+## 오늘 만든 파일
+
+- `README.md`
+- `docs/requirements.md`
+- `docs/api-spec.md`
+- `docs/state-flow.md`
+- `docs/architecture.md`
+- `docs/day-1-log.md`
+
+## 첫 커밋
+
+```text
+docs: define SeatHub day 1 planning
+```
+
+## 다음 작업 후보
+
+내일은 Day 2 작업으로 넘어갑니다.
+
+1. ERD 초안 작성
+2. 예약 상태 흐름 보완
+3. 기술 스택 확정
+4. 패키지 구조 작성
+5. Docker Compose 초안 작성
+
