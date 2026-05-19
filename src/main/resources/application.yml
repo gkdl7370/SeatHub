@@ -3,6 +3,10 @@ spring:
     name: seathub
   profiles:
     default: local
+  data:
+    redis:
+      repositories:
+        enabled: false
 
 server:
   port: 8080
@@ -13,3 +17,7 @@ management:
       exposure:
         include: health,info
 
+seathub:
+  jwt:
+    secret: seathub-local-development-secret-key-for-hmac-sha256
+    access-token-expiration-seconds: 3600

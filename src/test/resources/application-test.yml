@@ -4,6 +4,8 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+  flyway:
+    enabled: false
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -12,4 +14,3 @@ spring:
     redis:
       host: localhost
       port: 6379
-

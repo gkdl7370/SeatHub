@@ -37,8 +37,111 @@
 | --- | --- | --- | --- |
 | POST | `/auth/signup` | 회원가입 | 불필요 |
 | POST | `/auth/login` | 로그인 | 불필요 |
+| GET | `/auth/me` | 현재 로그인한 회원 정보 조회 | 필요 |
 | POST | `/auth/reissue` | 토큰 재발급 | 필요 |
 | POST | `/auth/logout` | 로그아웃 | 필요 |
+
+### 회원가입
+
+```http
+POST /api/v1/auth/signup
+```
+
+요청:
+
+```json
+{
+  "email": "user@example.com",
+  "password": "password123",
+  "name": "테스트회원"
+}
+```
+
+응답:
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "email": "user@example.com",
+    "name": "테스트회원",
+    "roles": ["USER"]
+  }
+}
+```
+
+주요 예외:
+
+| 코드 | HTTP Status | 설명 |
+| --- | --- | --- |
+| `INVALID_REQUEST` | 400 | 요청값 검증 실패 |
+| `DUPLICATE_EMAIL` | 409 | 이미 가입된 이메일 |
+
+### 로그인
+
+```http
+POST /api/v1/auth/login
+```
+
+요청:
+
+```json
+{
+  "email": "user@example.com",
+  "password": "password123"
+}
+```
+
+응답:
+
+```json
+{
+  "success": true,
+  "data": {
+    "tokenType": "Bearer",
+    "accessToken": "header.payload.signature",
+    "expiresIn": 3600
+  },
+  "traceId": "request-trace-id"
+}
+```
+
+주요 예외:
+
+| 코드 | HTTP Status | 설명 |
+| --- | --- | --- |
+| `INVALID_REQUEST` | 400 | 요청값 검증 실패 |
+| `INVALID_LOGIN` | 401 | 이메일 또는 비밀번호 불일치 |
+
+### 내 정보 조회
+
+```http
+GET /api/v1/auth/me
+Authorization: Bearer {accessToken}
+```
+
+응답:
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "email": "user@example.com",
+    "name": "테스트회원",
+    "roles": ["USER"]
+  },
+  "traceId": "request-trace-id"
+}
+```
+
+주요 예외:
+
+| 코드 | HTTP Status | 설명 |
+| --- | --- | --- |
+| `UNAUTHORIZED` | 401 | 인증 토큰이 없거나 유효하지 않음 |
+| `RESOURCE_NOT_FOUND` | 404 | 토큰의 회원 ID에 해당하는 회원을 찾을 수 없음 |
 
 ---
 
@@ -122,4 +225,3 @@
 | `to` | 예약 종료일 |
 | `page` | 페이지 번호 |
 | `size` | 페이지 크기 |
-
