@@ -154,6 +154,97 @@ Authorization: Bearer {accessToken}
 | GET | `/products/{productId}/schedules` | 상품 회차 목록 조회 | 불필요 |
 | GET | `/schedules/{scheduleId}/seats` | 회차 좌석 목록 조회 | 불필요 |
 
+### 상품 목록 조회
+
+```http
+GET /api/v1/products
+```
+
+응답:
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 2,
+      "name": "클래스 B",
+      "description": "원데이 클래스",
+      "status": "ACTIVE"
+    },
+    {
+      "id": 1,
+      "name": "뮤지컬 A",
+      "description": "주말 공연 상품",
+      "status": "ACTIVE"
+    }
+  ],
+  "traceId": "request-trace-id"
+}
+```
+
+현재 목록은 최신 등록 상품이 먼저 보이도록 `id` 내림차순으로 조회합니다.
+
+### 상품 상세 조회
+
+```http
+GET /api/v1/products/{productId}
+```
+
+응답:
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "name": "뮤지컬 A",
+    "description": "주말 공연 상품",
+    "status": "ACTIVE"
+  },
+  "traceId": "request-trace-id"
+}
+```
+
+주요 예외:
+
+| 코드 | HTTP Status | 설명 |
+| --- | --- | --- |
+| `PRODUCT_NOT_FOUND` | 404 | 상품을 찾을 수 없음 |
+
+### 상품 회차 목록 조회
+
+```http
+GET /api/v1/products/{productId}/schedules
+```
+
+응답:
+
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": 1,
+      "productId": 1,
+      "startAt": "2026-06-01T19:00:00",
+      "endAt": "2026-06-01T21:00:00",
+      "status": "OPEN"
+    }
+  ],
+  "traceId": "request-trace-id"
+}
+```
+
+회차 목록은 실제 사용자가 날짜와 시간을 고르는 기준 데이터입니다.
+현재는 시작 시간이 빠른 회차가 먼저 보이도록 `startAt` 오름차순으로 조회합니다.
+
+주요 예외:
+
+| 코드 | HTTP Status | 설명 |
+| --- | --- | --- |
+| `PRODUCT_NOT_FOUND` | 404 | 상품을 찾을 수 없음 |
+
 ---
 
 ## 예약 API
@@ -186,6 +277,76 @@ Authorization: Bearer {accessToken}
 | POST | `/admin/schedules/{scheduleId}/seats` | 좌석 등록 | 관리자 |
 | GET | `/admin/reservations` | 예약 검색 | 관리자 |
 | GET | `/admin/payments` | 결제 검색 | 관리자 |
+
+### 상품 등록
+
+```http
+POST /api/v1/admin/products
+Authorization: Bearer {accessToken}
+```
+
+요청:
+
+```json
+{
+  "name": "뮤지컬 A",
+  "description": "주말 공연 상품"
+}
+```
+
+응답:
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "name": "뮤지컬 A",
+    "description": "주말 공연 상품",
+    "status": "ACTIVE"
+  },
+  "traceId": "request-trace-id"
+}
+```
+
+### 회차 등록
+
+```http
+POST /api/v1/admin/products/{productId}/schedules
+Authorization: Bearer {accessToken}
+```
+
+요청:
+
+```json
+{
+  "startAt": "2026-06-01T19:00:00",
+  "endAt": "2026-06-01T21:00:00"
+}
+```
+
+응답:
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": 1,
+    "productId": 1,
+    "startAt": "2026-06-01T19:00:00",
+    "endAt": "2026-06-01T21:00:00",
+    "status": "OPEN"
+  },
+  "traceId": "request-trace-id"
+}
+```
+
+주요 예외:
+
+| 코드 | HTTP Status | 설명 |
+| --- | --- | --- |
+| `PRODUCT_NOT_FOUND` | 404 | 회차를 등록할 상품을 찾을 수 없음 |
+| `INVALID_SCHEDULE_TIME` | 400 | 종료 시간이 시작 시간보다 빠르거나 같음 |
 
 ---
 
